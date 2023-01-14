@@ -32,16 +32,20 @@ const Navigation = () => {
               : `${styles.side_nav} `
           }
         >
-          <Link href="/">
+          <Link href="/" onClick={handleClick}>
             <li>Home</li>
           </Link>
-          <Link href="/about">
+          <Link href="/" onClick={handleClick}>
             <li>About</li>
           </Link>
-          <Link href="/sign-up" className={styles.sign_up}>
+          <Link
+            href="/sign-up"
+            className={styles.sign_up}
+            onClick={handleClick}
+          >
             <li>Sign Up</li>
           </Link>
-          <Link href="/login" className={styles.login}>
+          <Link href="/login" className={styles.login} onClick={handleClick}>
             <li>Login</li>
           </Link>
         </ul>
