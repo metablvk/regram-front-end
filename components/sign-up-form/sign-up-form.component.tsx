@@ -12,12 +12,12 @@ const SignUpForm = () => {
           </div>
           <div className={styles.form_group}>
             <input type="password" name="confirm_password" required />
-            <label htmlFor="">Password</label>
+            <label htmlFor="">password</label>
             <span className={styles.bar}></span>
           </div>
           <div className={styles.form_group}>
             <input type="password" name="password" required />
-            <label htmlFor="">Confirm Password</label>
+            <label htmlFor="">confirm Password</label>
             <span className={styles.bar}></span>
           </div>
           <button className="btn">Sign Up</button>
