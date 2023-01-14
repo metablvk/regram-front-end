@@ -1,3 +1,8 @@
+.navigation_container {
+  position: sticky;
+  top: 0;
+  background: #14171a;
+}
 .navbar {
   display: flex;
   align-items: center;
@@ -27,11 +32,16 @@
   right: 0;
   top: 0rem;
   flex-direction: column;
-  justify-content: center;
-  top: 10rem;
-  background: #fff;
+  justify-content: flex-end;
+  padding-top: 12rem;
+  top: 9.83rem;
+  background: rgba(20, 23, 26, 0.92);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(5.1px);
+  -webkit-backdrop-filter: blur(5.1px);
+  border: 1px solid rgba(20, 23, 26, 0.29);
   overflow: hidden;
-  height: calc(100% - 10rem);
+  height: calc(100% - 9.8rem);
   max-width: 0;
   right: 0;
   transition: 0.1s;
@@ -44,7 +54,7 @@
 }
 
 .side_nav a {
-  color: #14171a;
+  color: #fff;
   font-size: 3.5rem;
 }
 
