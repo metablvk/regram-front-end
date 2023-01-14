@@ -16,6 +16,11 @@ body {
   box-sizing: border-box;
 }
 
+h1 {
+  font-size: 4rem;
+  margin-bottom: 2rem;
+}
+
 a {
   font-size: 1.8rem;
   text-decoration: none;
@@ -26,6 +31,16 @@ p {
   margin-bottom: 1.2rem;
 }
 
+label {
+  display: block;
+  margin-bottom: 1.2rem;
+  font-size: 1.8rem;
+}
+
+button {
+  cursor: pointer;
+}
+
 /* 
   Utils
 */
@@ -34,6 +49,20 @@ p {
   padding: 2.4rem;
 }
 
+.btn {
+  background: none;
+  border: 0.1rem solid #d46cf9;
+
+  padding: 1.6rem 3rem;
+  color: #fff;
+  font-weight: 1.8rem;
+  font-weight: 700;
+  transition: 0.3s;
+}
+
+.btn:hover {
+  background: #d46cf9;
+}
 @media screen and (min-width: 1200px) {
   .container {
     margin: 0 auto;
