@@ -1,0 +1,132 @@
+.sign_up_form {
+  margin-top: 2.4rem;
+  color: #fff;
+  max-width: 400px;
+  z-index: 1;
+}
+
+.sign_up_form h1 {
+  font-weight: 700;
+}
+
+.form_group {
+  position: relative;
+  margin-bottom: 4.8rem;
+  top: 1rem;
+}
+
+.sign_up_form label {
+  position: absolute;
+  pointer-events: none;
+  left: 5px;
+  top: 10px;
+  transition: 0.2s ease all;
+  -moz-transition: 0.2s ease all;
+  -webkit-transition: 0.2s ease all;
+  z-index: 1;
+}
+
+.sign_up_form input {
+  width: 100%;
+  padding: 1.2rem;
+  background: none;
+  border: none;
+  border-bottom: 0.1rem solid#fff;
+  color: #fff;
+  font-size: 1.6rem;
+}
+
+.sign_up_form input:focus {
+  outline: none;
+}
+
+.sign_up_form input:focus ~ label,
+.sign_up_form input:valid ~ label {
+  top: -20px;
+  font-size: 14px;
+  color: #fff;
+}
+
+.bar {
+  position: relative;
+  display: block;
+  width: 100%;
+}
+
+.bar:before,
+.bar:after {
+  content: "";
+  height: 2px;
+  width: 0;
+  bottom: 1px;
+  position: absolute;
+  background: #fff;
+  transition: 0.2s ease all;
+  -moz-transition: 0.2s ease all;
+  -webkit-transition: 0.2s ease all;
+}
+
+.bar:before {
+  left: 50%;
+}
+
+.bar:after {
+  right: 50%;
+}
+
+input:focus ~ .bar:before,
+input:focus ~ .bar:after {
+  width: 50%;
+}
+
+.highlight {
+  position: absolute;
+  height: 60%;
+  width: 100px;
+  top: 25%;
+  left: 0;
+  pointer-events: none;
+  opacity: 0.5;
+}
+
+input:focus ~ .highlight {
+  -webkit-animation: inputHighlighter 0.3s ease;
+  -moz-animation: inputHighlighter 0.3s ease;
+  animation: inputHighlighter 0.3s ease;
+}
+
+@-webkit-keyframes inputHighlighter {
+  from {
+    background: #fff;
+  }
+  to {
+    width: 0;
+    background: transparent;
+  }
+}
+@-moz-keyframes inputHighlighter {
+  from {
+    background: #fff;
+  }
+  to {
+    width: 0;
+    background: transparent;
+  }
+}
+@keyframes inputHighlighter {
+  from {
+    background: #fff;
+  }
+  to {
+    width: 0;
+    background: transparent;
+  }
+}
+
+.sign_up_form button {
+  display: block;
+  margin-left: auto;
+  font-size: 1.8rem;
+  text-transform: lowercase;
+  border-radius: 0.3rem;
+}
