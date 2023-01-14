@@ -23,6 +23,21 @@ export const createAuthUserWithEmailAndPassword = async (
   email: string,
   password: string
 ): Promise<UserCredential | void> => {
+  /*
+    Firebase function to create a user.
+    @typedef {UserCredential}
+    @param {string} email - Email to create in firebase auth
+    @param {string} password - Password create in firebase auth 
+
+    @example
+    if email or password empty
+    return 
+
+    @example
+    if email or password not empty 
+    return createUserWithEmailAndPassword
+  */
+
   if (!email || !password) return;
 
   return await createUserWithEmailAndPassword(auth, email, password);
