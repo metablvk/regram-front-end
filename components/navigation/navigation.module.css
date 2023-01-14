@@ -1,0 +1,64 @@
+.navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.hamburger {
+  cursor: pointer;
+}
+
+.bar {
+  display: block;
+  width: 3rem;
+  height: 0.1rem;
+  margin-bottom: 1rem;
+  position: relative;
+  background: #fff;
+  z-index: 1;
+  transform-origin: 4px 0px;
+  transition: transform 0.5s cubic-bezier(0.77, 0.2, 0.05, 1),
+    background 0.5s cubic-bezier(0.77, 0.2, 0.05, 1), opacity 0.55s ease;
+}
+
+.side_nav {
+  position: fixed;
+  right: 0;
+  top: 0rem;
+  flex-direction: column;
+  justify-content: center;
+  top: 10rem;
+  background: #fff;
+  overflow: hidden;
+  height: calc(100% - 10rem);
+  max-width: 0;
+  right: 0;
+  transition: 0.1s;
+  width: 100%;
+}
+
+.side_nav li {
+  padding: 2.4rem;
+  text-align: right;
+}
+
+.side_nav a {
+  color: #14171a;
+  font-size: 3.5rem;
+}
+
+.show_nav {
+  max-width: 100%;
+}
+
+.sign_up,
+.login {
+  font-weight: 700;
+}
+
+@media screen and (min-width: 1200px) {
+  .side_nav li {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+}
