@@ -1,6 +1,7 @@
 .post {
   color: #6a7987;
   border-bottom: 0.1rem solid #d46cf9;
+  margin-bottom: 0.02rem;
   box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
 }
 
@@ -112,6 +113,6 @@
 @media screen and (min-width: 450px) {
   .post {
     max-width: 450px;
-    margin: 1.2rem auto;
+    margin: 0.3rem auto;
   }
 }
