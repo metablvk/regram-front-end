@@ -12,7 +12,7 @@ const LoginForm = () => {
         </div>
         <div className={styles.form_group}>
           <input type="password" name="password" required />
-          <label htmlFor="">Password</label>
+          <label htmlFor="">password</label>
           <span className={styles.bar}></span>
         </div>
         <button className="btn">Login</button>
