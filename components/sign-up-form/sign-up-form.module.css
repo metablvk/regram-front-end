@@ -130,3 +130,9 @@ input:focus ~ .highlight {
   text-transform: lowercase;
   border-radius: 0.3rem;
 }
+
+@media screen and (min-width: 400px) {
+  .sign_up_form {
+    margin: 0 auto;
+  }
+}
