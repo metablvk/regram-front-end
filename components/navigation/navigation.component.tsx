@@ -8,7 +8,7 @@ const Navigation = () => {
   const [menuState, setMenuState] = useState<boolean>(false);
   const handleClick = () => setMenuState(!menuState);
   return (
-    <>
+    <div className={styles.navigation_container}>
       <nav className={`${styles.navbar} container`}>
         <div className="logo">
           <Link href="/">
@@ -46,7 +46,7 @@ const Navigation = () => {
           </Link>
         </ul>
       </nav>
-    </>
+    </div>
   );
 };
 
