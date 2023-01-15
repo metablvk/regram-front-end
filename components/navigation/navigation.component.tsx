@@ -1,22 +1,30 @@
-import { useState } from "react";
-import Link from "next/link";
-import Image from "next/image";
-import styles from "./navigation.module.css";
+import { useState } from 'react';
+import Link from 'next/link';
+import Image from 'next/image';
+import { useSelector } from 'react-redux';
+import { selectCurrentUser } from 'store/user/user.selector';
+import styles from './navigation.module.css';
 
 const Navigation = () => {
-  // Main navigation
+  /**
+   * Navigation
+   * @params {user} - User returned from firebase
+   * @example
+   * if user logged in return profile and sign out
+   */
+  const currentUser = useSelector(selectCurrentUser);
   const [menuState, setMenuState] = useState<boolean>(false);
   const handleClick = () => setMenuState(!menuState);
   return (
     <div className={styles.navigation_container}>
       <nav className={`${styles.navbar} container`}>
-        <div className="logo">
-          <Link href="/">
+        <div className='logo'>
+          <Link href='/'>
             <Image
-              src="images/regram-logo.svg"
+              src='images/regram-logo.svg'
               height={60}
               width={60}
-              alt="regram logo"
+              alt='regram logo'
             />
           </Link>
         </div>
@@ -32,18 +40,31 @@ const Navigation = () => {
               : `${styles.side_nav} `
           }
         >
-          <Link href="/">
+          <Link href='/'>
             <li>Home</li>
           </Link>
-          <Link href="/about">
+          <Link href='/about'>
             <li>About</li>
           </Link>
-          <Link href="/sign-up" className={styles.sign_up}>
-            <li>Sign Up</li>
-          </Link>
-          <Link href="/login" className={styles.login}>
-            <li>Login</li>
-          </Link>
+          {currentUser ? (
+            <>
+              <Link href='/profile'>
+                <li>Profile</li>
+              </Link>
+              <Link href='/sign-out'>
+                <li>Sign Out</li>
+              </Link>
+            </>
+          ) : (
+            <>
+              <Link href='/sign-up' className={styles.sign_up}>
+                <li>Sign Up</li>
+              </Link>
+              <Link href='/login' className={styles.login}>
+                <li>Login</li>
+              </Link>
+            </>
+          )}
         </ul>
       </nav>
     </div>
