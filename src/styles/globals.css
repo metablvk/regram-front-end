@@ -7,7 +7,7 @@
 html,
 body {
   background: #14171a;
-  color: #14171a;
+  color: #fff;
   font-size: 62.5%;
   font-family: 'Open Sans', sans-serif;
 }
@@ -41,6 +41,15 @@ button {
   cursor: pointer;
 }
 
+small,
+strong {
+  font-size: 1.6rem;
+}
+
+strong {
+  font-weight: 700;
+  margin-bottom: 1rem;
+}
 input:-webkit-autofill,
 input:-webkit-autofill:hover,
 input:-webkit-autofill:focus,
