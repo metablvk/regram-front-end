@@ -1,12 +1,12 @@
-import { FC } from "react";
-import Link from "next/link";
-import Image from "next/image";
-import styles from "./post.module.css";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faHeart, faComment } from "@fortawesome/free-solid-svg-icons";
+import { FC } from 'react';
+import Link from 'next/link';
+import Image from 'next/image';
+import styles from './post.module.css';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faHeart, faComment } from '@fortawesome/free-solid-svg-icons';
 
 type Post = {
-  img: string;
+  img: string | null;
   likes: number;
   username: string;
   description: string;
@@ -18,13 +18,15 @@ type Props = {
 const Post: FC<Props> = ({ post }) => {
   return (
     <div className={styles.post}>
-      <Image
-        src={post.img}
-        height={200}
-        width={200}
-        alt="Stock image"
-        className={styles.post_img}
-      />
+      {post.img && (
+        <Image
+          src={post.img}
+          height={200}
+          width={200}
+          alt='Stock image'
+          className={styles.post_img}
+        />
+      )}
       <section className={styles.card}>
         <div className={styles.card_header}>
           <div>
@@ -42,7 +44,7 @@ const Post: FC<Props> = ({ post }) => {
           <p>{post.description}</p>
         </div>
         <div className={styles.card_footer}>
-          <Link href="/">View All Comments</Link>
+          <Link href='/'>View All Comments</Link>
         </div>
       </section>
     </div>
