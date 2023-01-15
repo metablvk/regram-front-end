@@ -3,7 +3,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { useSelector } from 'react-redux';
 import { selectCurrentUser } from 'store/user/user.selector';
-
+import { signOutUser } from 'utils/firebase/firebase.utils';
 import styles from './navigation.module.css';
 
 const Navigation = () => {
@@ -14,6 +14,10 @@ const Navigation = () => {
   const currentUser = useSelector(selectCurrentUser);
   const [menuState, setMenuState] = useState<boolean>(false);
   const handleClick = () => setMenuState(!menuState);
+  const handleSignOut = () => {
+    signOutUser();
+    setMenuState(!menuState);
+  };
   return (
     <div className={styles.navigation_container}>
       <nav className={`${styles.navbar} container`}>
@@ -47,10 +51,10 @@ const Navigation = () => {
           </Link>
           {currentUser ? (
             <>
-              <Link href='/'>
+              <Link href='/' onClick={handleClick}>
                 <li>Profile</li>
               </Link>
-              <Link href='/'>
+              <Link href='/' onClick={handleSignOut}>
                 <li>Sign Out</li>
               </Link>
             </>
