@@ -1,15 +1,15 @@
 /* 
   Global Styles
 */
-@import url("./reset.css");
-@import url("https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,700;1,400&display=swap");
+@import url('./reset.css');
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,700;1,400&display=swap');
 
 html,
 body {
   background: #14171a;
   color: #14171a;
   font-size: 62.5%;
-  font-family: "Open Sans", sans-serif;
+  font-family: 'Open Sans', sans-serif;
 }
 
 * {
@@ -39,6 +39,14 @@ label {
 
 button {
   cursor: pointer;
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+  -webkit-box-shadow: 0 0 0 30px #14171a inset !important;
+  -webkit-text-fill-color: #fff !important;
 }
 
 /* 
