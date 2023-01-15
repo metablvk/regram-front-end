@@ -19,7 +19,7 @@ function App({ Component, pageProps }: AppProps) {
   const dispatch = useDispatch();
   const currentUser = useSelector(selectCurrentUser);
   useEffect(() => {
-    const unsubscribe = onAuthStateChangedListener((user: any) => {
+    const unsubscribe = onAuthStateChangedListener((user: User) => {
       dispatch(setCurrentUser(user));
     });
     return unsubscribe;
