@@ -1,7 +1,7 @@
 import { FC, useState, ChangeEvent, FormEvent } from 'react';
 import styles from './sign-up-form.module.css';
 import { createAuthUserWithEmailAndPassword } from 'utils/firebase/firebase.utils';
-
+import { useRouter } from 'next/router';
 type FormFields = {
   email: string;
   password: string;
@@ -22,7 +22,7 @@ const SignUpForm = () => {
    * @param {string} - user password
    * @param {string} - confirm password
    */
-
+  const router = useRouter();
   const [formFields, setFormFields] = useState<FormFields>(defaultFormFields);
   const { email, password, confirmPassword } = formFields;
 
@@ -52,6 +52,10 @@ const SignUpForm = () => {
     e.preventDefault();
     try {
       const user = await createAuthUserWithEmailAndPassword(email, password);
+      console.log(user);
+      if (user) {
+        router.push('profile');
+      }
     } catch (e) {
       console.log(e);
     }

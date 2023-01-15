@@ -1,5 +1,6 @@
 import { FC, useState, ChangeEvent, FormEvent } from 'react';
 import { signInAuthUserWithEmailAndPassword } from 'utils/firebase/firebase.utils';
+import { useRouter } from 'next/router';
 import styles from './login-form.module.css';
 
 type FormFields = {
@@ -21,6 +22,7 @@ const LoginForm = () => {
    * @param {string} - user email
    * @param {string} - user password
    */
+  const router = useRouter();
   const [formFields, setFormFields] = useState<FormFields>(defaultFormFields);
   const { email, password } = formFields;
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -49,7 +51,9 @@ const LoginForm = () => {
     e.preventDefault();
     try {
       const user = await signInAuthUserWithEmailAndPassword(email, password);
-      console.log(user);
+      if (user) {
+        router.push('profile');
+      }
     } catch (e) {
       console.log(e);
     }
