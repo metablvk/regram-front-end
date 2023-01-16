@@ -1,7 +1,10 @@
 import Image from 'next/image';
 import styles from './profile-header.module.css';
+import { selectCurrentProfile } from 'store/profile/profile.selector';
+import { useSelector } from 'react-redux';
 
 const ProfileHeader = () => {
+  const currentProfile = useSelector(selectCurrentProfile);
   return (
     <header className={styles.profile_header}>
       <div>
@@ -29,7 +32,9 @@ const ProfileHeader = () => {
           </div>
         </div>
         <div className={styles.tag_and_edit}>
-          <strong className={styles.profile_tag}>@Ashley</strong>
+          <strong className={styles.profile_tag}>
+            @{`${currentProfile.username}`}
+          </strong>
           <button className={`${styles.profile_edit_btn}`}>Edit Profile</button>
         </div>
       </div>

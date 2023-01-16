@@ -4,10 +4,13 @@ import { User } from 'firebase/auth';
 import { wrapper, store } from '../../store/store';
 import { Provider, useDispatch, useSelector } from 'react-redux';
 import '@/styles/globals.css';
-import { onAuthStateChangedListener } from '../../utils/firebase/firebase.utils';
+import {
+  onAuthStateChangedListener,
+  getProfile,
+} from '../../utils/firebase/firebase.utils';
 import { selectCurrentUser } from 'store/user/user.selector';
 import { setCurrentUser } from 'store/user/user.action';
-
+import { setCurrentProfile } from 'store/profile/profile.action';
 function App({ Component, pageProps }: AppProps) {
   /**
    * App Component
@@ -25,8 +28,14 @@ function App({ Component, pageProps }: AppProps) {
     return unsubscribe;
   }, [dispatch]);
   useEffect(() => {
-    console.log(currentUser);
-  }, [currentUser]);
+    const handleGetProfile = async () => {
+      if (currentUser) {
+        const profile = await getProfile(currentUser.uid);
+        dispatch(setCurrentProfile(profile));
+      }
+    };
+    handleGetProfile();
+  }, [dispatch, currentUser]);
   return (
     <>
       <Provider store={store}>
