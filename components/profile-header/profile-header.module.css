@@ -20,6 +20,10 @@
 .profile_stats div {
   margin-right: 1rem;
 }
+.profile_stats strong {
+  display: block;
+  margin-bottom: 0.2rem;
+}
 
 .tag_and_edit {
   display: flex;
@@ -31,4 +35,16 @@
   border: none;
   background: #ccc;
   padding: 1rem 0;
+}
+
+.profile_placeholder {
+  background: #6a7987;
+  height: 11.5rem;
+  width: 11.5rem;
+  margin-right: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 3rem;
+  font-weight: 700;
 }
