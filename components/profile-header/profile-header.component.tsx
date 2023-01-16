@@ -8,13 +8,19 @@ const ProfileHeader = () => {
   return (
     <header className={styles.profile_header}>
       <div>
-        <Image
-          src='/images/stock-image-1.jpg'
-          height={115}
-          width={115}
-          alt='Profile Image'
-          className={styles.profile_img}
-        />
+        {currentProfile && currentProfile.img ? (
+          <Image
+            src='/images/stock-image-1.jpg'
+            height={115}
+            width={115}
+            alt='Profile Image'
+            className={styles.profile_img}
+          />
+        ) : (
+          <div className={styles.profile_placeholder}>
+            {currentProfile.username[0]}
+          </div>
+        )}
       </div>
       <div>
         <div className={styles.profile_stats}>
