@@ -13,7 +13,7 @@ import {
   collection,
   query,
   where,
-  // getDocs,
+  getDocs,
   setDoc,
   getDoc,
   doc,
@@ -98,4 +98,25 @@ export const getProfile = async (uid: string) => {
 export const createUsername = async (uid: string, username: string) => {
   const profileRef = doc(db, 'profile', uid);
   return setDoc(profileRef, { username: username }, { merge: true });
+};
+
+export const getAllProfileIds = async () => {
+  /*
+    A function that gets all book titles, and uses them as ids.
+  */
+  const collectionRef = collection(db, 'profile');
+  const q = query(collectionRef);
+  try {
+    const querySnapshot = await getDocs(q);
+    const ids = querySnapshot.docs.map((docSnapshot) => {
+      return {
+        params: {
+          id: docSnapshot.id,
+        },
+      };
+    });
+    return ids;
+  } catch (e) {
+    console.error('Error getting books: ', e);
+  }
 };

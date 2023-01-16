@@ -24,7 +24,7 @@ const Navigation = () => {
         <div className='logo'>
           <Link href='/'>
             <Image
-              src='images/regram-logo.svg'
+              src='/images/regram-logo.svg'
               height={60}
               width={60}
               alt='regram logo'
