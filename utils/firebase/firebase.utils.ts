@@ -7,7 +7,17 @@ import {
   onAuthStateChanged,
   signOut,
 } from 'firebase/auth';
-
+import {
+  getFirestore,
+  addDoc,
+  collection,
+  query,
+  where,
+  // getDocs,
+  setDoc,
+  getDoc,
+  doc,
+} from 'firebase/firestore';
 const firebaseConfig = {
   apiKey: 'AIzaSyAmGDgW2aLjf4fgYZ1xqRZn_1Jxr6oxvEo',
   authDomain: 'regram-af1c6.firebaseapp.com',
@@ -19,6 +29,7 @@ const firebaseConfig = {
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
+export const db = getFirestore();
 
 export const auth = getAuth();
 
@@ -71,3 +82,20 @@ export const onAuthStateChangedListener = (callback: any) =>
   onAuthStateChanged(auth, callback);
 
 export const signOutUser = async (): Promise<void> => await signOut(auth);
+
+export const createProfile = async (uid: string, email: string) => {
+  await setDoc(doc(db, 'profile', uid), {
+    email: email,
+  });
+};
+
+export const getProfile = async (uid: string) => {
+  const docRef = doc(db, 'profile', uid);
+  const docSnap = await getDoc(docRef);
+  return docSnap.data();
+};
+
+export const createUsername = async (uid: string, username: string) => {
+  const profileRef = doc(db, 'profile', uid);
+  return setDoc(profileRef, { username: username }, { merge: true });
+};
