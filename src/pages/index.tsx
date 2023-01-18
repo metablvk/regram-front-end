@@ -1,8 +1,12 @@
 import Head from 'next/head';
-import Layout from 'components/layout/layout.component';
-import Post from 'components/post/post.component';
+// Redux
 import { selectCurrentPost } from 'store/post/post.selector';
 import { useSelector } from 'react-redux';
+// Types
+import { IPost } from 'types/Post';
+// Components
+import Layout from 'components/layout/layout.component';
+import Post from 'components/post/post.component';
 export default function Home() {
   const posts = useSelector(selectCurrentPost);
   return (
