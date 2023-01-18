@@ -64,8 +64,12 @@ const SignUpForm = () => {
         password
       );
       if (userCred && userCred.user.email) {
-        createProfile(userCred.user.uid, userCred.user.email, username);
-        router.push(`profile/${userCred.user.uid}`);
+        try {
+          createProfile(userCred.user.uid, userCred.user.email, username);
+          router.push(`profile/${userCred.user.uid}`);
+        } catch (e) {
+          console.log(e);
+        }
       }
     } catch (e) {
       console.log(e);
