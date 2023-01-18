@@ -59,44 +59,34 @@ const Profile = () => {
   return (
     <>
       <Layout>
-        {currentProfile && currentProfile.username ? (
-          /**
-           * If currentProfile currentProfile.username display component
-           */
-          <div className={`${styles.profile}`}>
-            <>
-              <ProfileHeader />
-              {currentProfile &&
-              profile &&
-              currentProfile.username === profile.username ? (
-                /**
-                 * If currentProfile and profile exist mach the username to see if the user is allowed
-                 * to create a post.
-                 */
-                <CreatePost />
-              ) : (
-                ''
-              )}
-              <div className={styles.user_posts}>
-                {posts &&
-                  posts.map((post: IPost, key: number) => {
-                    if (post.uid === id) {
-                      return <Post key={key} post={post} />;
-                    }
-                  })}
-              </div>
-            </>
-          </div>
-        ) : currentUser &&
-          currentProfile &&
-          currentUser.email === currentProfile.email ? (
-          /**
-           * If current user and current profile exist match email,
-           * and display create username form if one does not exist
-           * else return null
-           */
-          <CreateUsernameForm />
-        ) : null}
+        <div className={`${styles.profile}`}>
+          <ProfileHeader />
+          {/* 
+          If currentProfile.username === profile.username add create post component
+          else just display posts.
+        */}
+          {currentProfile &&
+          profile &&
+          currentProfile.username === profile.username ? (
+            /**
+             * If currentProfile and profile exist mach the username to see if the user is allowed
+             * to create a post.
+             */
+            <CreatePost />
+          ) : currentUser &&
+            currentProfile &&
+            currentUser.email === currentProfile.email ? (
+            <CreateUsernameForm />
+          ) : null}
+        </div>
+        <div className={styles.user_posts}>
+          {posts &&
+            posts.map((post: IPost, key: number) => {
+              if (post.uid === id) {
+                return <Post key={key} post={post} />;
+              }
+            })}
+        </div>
       </Layout>
     </>
   );
