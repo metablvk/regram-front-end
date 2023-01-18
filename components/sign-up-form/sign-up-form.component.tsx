@@ -3,17 +3,21 @@ import styles from './sign-up-form.module.css';
 import {
   createAuthUserWithEmailAndPassword,
   createProfile,
+  createUsername,
 } from 'utils/firebase/firebase.utils';
+
 import { useRouter } from 'next/router';
 
 type FormFields = {
   email: string;
+  username: string;
   password: string;
   confirmPassword: string;
 };
 
 const defaultFormFields = {
   email: '',
+  username: '',
   password: '',
   confirmPassword: '',
 };
@@ -28,7 +32,7 @@ const SignUpForm = () => {
    */
   const router = useRouter();
   const [formFields, setFormFields] = useState<FormFields>(defaultFormFields);
-  const { email, password, confirmPassword } = formFields;
+  const { email, username, password, confirmPassword } = formFields;
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     /**
@@ -60,7 +64,7 @@ const SignUpForm = () => {
         password
       );
       if (userCred && userCred.user.email) {
-        createProfile(userCred.user.uid, userCred.user.email);
+        createProfile(userCred.user.uid, userCred.user.email, username);
         router.push(`profile/${userCred.user.uid}`);
       }
     } catch (e) {
@@ -81,6 +85,17 @@ const SignUpForm = () => {
               required
             />
             <label htmlFor='email'>email</label>
+            <span className={styles.bar}></span>
+          </div>
+          <div className={styles.form_group}>
+            <input
+              type='text'
+              name='username'
+              onChange={handleChange}
+              value={username}
+              required
+            />
+            <label htmlFor='username'>username</label>
             <span className={styles.bar}></span>
           </div>
           <div className={styles.form_group}>

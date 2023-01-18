@@ -65,20 +65,8 @@ const Profile = () => {
           If currentProfile.username === profile.username add create post component
           else just display posts.
         */}
-          {currentProfile &&
-          profile &&
-          currentProfile.username === profile.username ? (
-            /**
-             * If currentProfile and profile exist mach the username to see if the user is allowed
-             * to create a post.
-             */
-            <CreatePost />
-          ) : currentUser &&
-            currentProfile &&
-            currentUser.email === currentProfile.email ? (
-            <CreateUsernameForm />
-          ) : null}
         </div>
+        {currentProfile.username === profile.username && <CreatePost />}
         <div className={styles.user_posts}>
           {posts &&
             posts.map((post: IPost, key: number) => {

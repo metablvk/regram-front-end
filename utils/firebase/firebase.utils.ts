@@ -83,9 +83,14 @@ export const onAuthStateChangedListener = (callback: any) =>
 
 export const signOutUser = async (): Promise<void> => await signOut(auth);
 
-export const createProfile = async (uid: string, email: string) => {
+export const createProfile = async (
+  uid: string,
+  email: string,
+  username: string
+) => {
   await setDoc(doc(db, 'profile', uid), {
     email: email,
+    username: username,
     img: '',
   });
 };
