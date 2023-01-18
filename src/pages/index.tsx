@@ -1,7 +1,14 @@
 import Head from 'next/head';
+// Redux
+import { selectCurrentPost } from 'store/post/post.selector';
+import { useSelector } from 'react-redux';
+// Types
+import { IPost } from 'types/Post';
+// Components
 import Layout from 'components/layout/layout.component';
 import Post from 'components/post/post.component';
 export default function Home() {
+  const posts = useSelector(selectCurrentPost);
   return (
     <>
       <Head>
@@ -11,7 +18,12 @@ export default function Home() {
         <link rel='icon' href='/favicon.ico' />
       </Head>
       <Layout>
-        <></>
+        <>
+          {posts &&
+            posts.map((post: IPost, key: number) => {
+              return <Post key={key} post={post} />;
+            })}
+        </>
       </Layout>
     </>
   );
