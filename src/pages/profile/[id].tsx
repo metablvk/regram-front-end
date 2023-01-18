@@ -66,7 +66,9 @@ const Profile = () => {
           else just display posts.
         */}
         </div>
-        {currentProfile.username === profile.username && <CreatePost />}
+        {currentProfile && currentProfile.username === profile.username && (
+          <CreatePost />
+        )}
         <div className={styles.user_posts}>
           {posts &&
             posts.map((post: IPost, key: number) => {
