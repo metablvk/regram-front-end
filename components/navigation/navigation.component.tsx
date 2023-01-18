@@ -24,7 +24,7 @@ const Navigation = () => {
         <div className='logo'>
           <Link href='/'>
             <Image
-              src='images/regram-logo.svg'
+              src='/images/regram-logo.svg'
               height={60}
               width={60}
               alt='regram logo'
@@ -51,7 +51,7 @@ const Navigation = () => {
           </Link>
           {currentUser ? (
             <>
-              <Link href='/profile' onClick={handleClick}>
+              <Link href={`/profile/${currentUser.uid}`} onClick={handleClick}>
                 <li>Profile</li>
               </Link>
               <Link href='/' onClick={handleSignOut}>

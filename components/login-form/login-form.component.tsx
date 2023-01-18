@@ -50,9 +50,12 @@ const LoginForm = () => {
      */
     e.preventDefault();
     try {
-      const user = await signInAuthUserWithEmailAndPassword(email, password);
-      if (user) {
-        router.push('profile');
+      const userCred = await signInAuthUserWithEmailAndPassword(
+        email,
+        password
+      );
+      if (userCred) {
+        router.push(`profile/${userCred.user.uid}`);
       }
     } catch (e) {
       console.log(e);

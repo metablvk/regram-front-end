@@ -2,26 +2,6 @@ import Head from 'next/head';
 import Layout from 'components/layout/layout.component';
 import Post from 'components/post/post.component';
 export default function Home() {
-  const posts = [
-    {
-      img: null,
-      likes: 124,
-      username: 'alicia',
-      description: `Lorem ipsum dolor sit amet, consectetur adipisicing elit. Soluta veritatis, explicabo mollitia tempore magnam quis.`,
-    },
-    {
-      img: null,
-      likes: 124,
-      username: 'alicia',
-      description: `Lorem ipsum dolor sit amet, consectetur adipisicing elit. Soluta veritatis, explicabo mollitia tempore magnam quis.`,
-    },
-    {
-      img: null,
-      likes: 524,
-      username: 'alicia',
-      description: `Lorem ipsum dolor sit amet, consectetur adipisicing elit. Soluta veritatis, explicabo mollitia tempore magnam quis.`,
-    },
-  ];
   return (
     <>
       <Head>
@@ -31,9 +11,7 @@ export default function Home() {
         <link rel='icon' href='/favicon.ico' />
       </Head>
       <Layout>
-        {posts.map((post, id) => (
-          <Post key={id} post={post} />
-        ))}
+        <></>
       </Layout>
     </>
   );

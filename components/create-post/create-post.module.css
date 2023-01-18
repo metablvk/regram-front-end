@@ -1,0 +1,29 @@
+.create_post {
+  max-width: 450px;
+  margin: 0 auto;
+  padding: 0.2rem;
+}
+
+.create_post textarea {
+  width: 100%;
+  margin-bottom: 2.4rem;
+  height: 8rem;
+  background: #14171a;
+  border: 0.1rem solid #6a7987;
+  resize: none;
+  color: #fff;
+  padding: 0.4rem;
+}
+
+.create_post textarea:focus {
+  outline: none;
+}
+
+.create_post button {
+  border: 0.1rem solid #d46cf9;
+  padding: 1.6rem 3rem;
+  color: #fff;
+  background: none;
+  display: block;
+  margin-left: auto;
+}
