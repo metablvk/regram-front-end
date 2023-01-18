@@ -86,18 +86,33 @@ export const signOutUser = async (): Promise<void> => await signOut(auth);
 export const createProfile = async (uid: string, email: string) => {
   await setDoc(doc(db, 'profile', uid), {
     email: email,
+    img: '',
   });
 };
 
-export const getProfile = async (uid: string) => {
+type Profile = {
+  email: string;
+  username: string | undefined;
+  img: string;
+};
+
+export const getProfile = async (uid: any) => {
   const docRef = doc(db, 'profile', uid);
   const docSnap = await getDoc(docRef);
-  return docSnap.data();
+  return docSnap.data() as Profile;
 };
 
 export const createUsername = async (uid: string, username: string) => {
-  const profileRef = doc(db, 'profile', uid);
-  return setDoc(profileRef, { username: username }, { merge: true });
+  const docRef = doc(db, 'profile', username.toLowerCase());
+  const docSnap = await getDoc(docRef);
+  if (docSnap.exists()) {
+    const profileRef = doc(db, 'profile', uid);
+    return setDoc(
+      profileRef,
+      { username: username.toLowerCase() },
+      { merge: true }
+    );
+  }
 };
 
 export const getAllProfileIds = async () => {
@@ -119,4 +134,44 @@ export const getAllProfileIds = async () => {
   } catch (e) {
     console.error('Error getting books: ', e);
   }
+};
+
+type Post = {
+  content: string;
+};
+
+export const createPost = async (uid: string, username: string, post: Post) => {
+  /**
+   * A function that creates a post in the database.
+   */
+  const { content } = post;
+  const postRef = await addDoc(collection(db, 'posts'), {
+    content,
+    img: '',
+    likes: 0,
+    comments: 0,
+    username,
+    uid,
+  });
+  const docSnap = await getDoc(postRef);
+  if (docSnap.exists()) {
+    return docSnap.data();
+  }
+};
+
+// export const getPosts = async (uid: string) => {
+//   const q = query(collection(db, 'posts'), where('uid', '==', uid));
+//   const querySnapshot = await getDocs(q);
+//   const posts = querySnapshot.docs.map((docSnapshot) => {
+//     return docSnapshot.data();
+//   });
+//   return posts;
+// };
+
+export const getPosts = async () => {
+  const querySnapshot = getDocs(collection(db, 'posts'));
+  const posts = (await querySnapshot).docs.map((docSnapshot) => {
+    return docSnapshot.data();
+  });
+  return posts;
 };

@@ -1,14 +1,32 @@
 import Image from 'next/image';
 import styles from './profile-header.module.css';
-import { selectCurrentProfile } from 'store/profile/profile.selector';
-import { useSelector } from 'react-redux';
+import { useRouter } from 'next/router';
+import { useEffect, useState } from 'react';
+import { getProfile } from 'utils/firebase/firebase.utils';
+import { IProfile } from 'types/Profile';
 
 const ProfileHeader = () => {
-  const currentProfile = useSelector(selectCurrentProfile);
+  const router = useRouter();
+  const [profile, setProfile] = useState<IProfile>({
+    email: '',
+    username: '',
+    img: '',
+  });
+  useEffect(() => {
+    const handleGetProfile = async () => {
+      if (router.query && router.query.id) {
+        const { id } = router.query;
+        const profile = await getProfile(id);
+        setProfile(profile);
+      }
+    };
+    handleGetProfile();
+    // handleGetProfile();
+  }, [router.query]);
   return (
     <header className={styles.profile_header}>
       <div>
-        {currentProfile && currentProfile.img ? (
+        {profile && profile.img ? (
           <Image
             src='/images/stock-image-1.jpg'
             height={115}
@@ -18,7 +36,7 @@ const ProfileHeader = () => {
           />
         ) : (
           <div className={styles.profile_placeholder}>
-            {currentProfile.username[0]}
+            {profile && profile.username && profile.username[0]}
           </div>
         )}
       </div>
@@ -39,7 +57,7 @@ const ProfileHeader = () => {
         </div>
         <div className={styles.tag_and_edit}>
           <strong className={styles.profile_tag}>
-            @{`${currentProfile.username}`}
+            @{`${profile.username}`}
           </strong>
           <button className={`${styles.profile_edit_btn}`}>Edit Profile</button>
         </div>

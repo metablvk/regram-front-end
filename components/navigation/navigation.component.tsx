@@ -51,7 +51,7 @@ const Navigation = () => {
           </Link>
           {currentUser ? (
             <>
-              <Link href='/profile' onClick={handleClick}>
+              <Link href={`/profile/${currentUser.uid}`} onClick={handleClick}>
                 <li>Profile</li>
               </Link>
               <Link href='/' onClick={handleSignOut}>
