@@ -2,7 +2,8 @@ export type IPost = {
   comments: number;
   content: string;
   img: string;
-  likes: number;
+  likes: string[];
   uid: string;
   username: string;
+  id: string;
 };

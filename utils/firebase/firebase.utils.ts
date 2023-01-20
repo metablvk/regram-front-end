@@ -153,14 +153,31 @@ export const createPost = async (uid: string, username: string, post: Post) => {
   const postRef = await addDoc(collection(db, 'posts'), {
     content,
     img: '',
-    likes: 0,
+    likes: [],
     comments: 0,
     username,
     uid,
   });
   const docSnap = await getDoc(postRef);
+
   if (docSnap.exists()) {
-    return docSnap.data();
+    return { id: docSnap.id, ...docSnap.data() };
+  }
+};
+
+export const addLike = async (id: string, uid: string) => {
+  const docRef = await doc(collection(db, 'posts'), id);
+  const docSnap = await getDoc(docRef);
+  const post = { ...docSnap.data() };
+
+  if (!post.likes.includes(uid)) {
+    post.likes.push(uid);
+    if (docSnap.exists()) {
+      const postRef = doc(db, 'posts', id);
+      setDoc(postRef, { ...post }, { merge: true });
+      const likedDoc = await getDoc(postRef);
+      return { id: likedDoc.id, ...likedDoc.data() };
+    }
   }
 };
 
@@ -174,9 +191,9 @@ export const createPost = async (uid: string, username: string, post: Post) => {
 // };
 
 export const getPosts = async () => {
-  const querySnapshot = getDocs(collection(db, 'posts'));
-  const posts = (await querySnapshot).docs.map((docSnapshot) => {
-    return docSnapshot.data();
+  const querySnap = getDocs(collection(db, 'posts'));
+  const posts = (await querySnap).docs.map((docSnap) => {
+    return { id: docSnap.id, ...docSnap.data() };
   });
   return posts;
 };
