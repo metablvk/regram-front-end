@@ -181,6 +181,19 @@ export const addLike = async (id: string, uid: string) => {
   }
 };
 
+export const removeLike = async (id: string, uid: string) => {
+  const docRef = await doc(collection(db, 'posts'), id);
+  const docSnap = await getDoc(docRef);
+  const post = { ...docSnap.data() };
+  if (post.likes.includes(uid)) {
+    const unlikedArray = post.likes.filter(
+      (likedBy: string) => likedBy !== uid
+    );
+    setDoc(docRef, { ...post, likes: unlikedArray }, { merge: true });
+    const unlikedDoc = await getDoc(docRef);
+    return { id: unlikedDoc.id, ...unlikedDoc.data() };
+  }
+};
 // export const getPosts = async (uid: string) => {
 //   const q = query(collection(db, 'posts'), where('uid', '==', uid));
 //   const querySnapshot = await getDocs(q);
