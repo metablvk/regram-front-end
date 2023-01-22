@@ -5,7 +5,7 @@ import styles from './post.module.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHeart, faComment } from '@fortawesome/free-solid-svg-icons';
 import { IPost } from 'types/Post';
-import { addLike } from 'utils/firebase/firebase.utils';
+import { addLike, removeLike } from 'utils/firebase/firebase.utils';
 import { selectCurrentUser } from 'store/user/user.selector';
 import { useSelector } from 'react-redux';
 import { selectCurrentPost } from 'store/post/post.selector';
@@ -21,23 +21,37 @@ const Post: FC<Props> = ({ post }) => {
 
   // WIP: Fix type error to use IPOST
   const [postState, setPostState] = useState<any>(post);
+  const [likes, setLikes] = useState(post.likes.length);
   const handleLike = async () => {
     if (currentUser) {
       try {
         // Likes a post by passing in the id, and user id
         if (post.id) {
-          const likedPost = await addLike(post.id, currentUser.uid);
-          // Get's the liked posts location
+          if (!postState.likes.includes(currentUser.uid)) {
+            const likedPost = await addLike(post.id, currentUser.uid);
+            // Get's the liked posts location
 
-          const likedPostLocation = currentPost.findIndex(
-            (obj: IPost) => obj.id === post.id
-          );
-          if (likedPost) {
-            const updatedPosts = currentPost;
-            updatedPosts[likedPostLocation] = likedPost;
-            setCurrentPost(updatedPosts);
-            setPostState(likedPost);
-            console.log(likedPost);
+            const likedPostLocation = currentPost.findIndex(
+              (obj: IPost) => obj.id === post.id
+            );
+            if (likedPost) {
+              const updatedPosts = currentPost;
+              updatedPosts[likedPostLocation] = likedPost;
+              setCurrentPost(updatedPosts);
+              setPostState(likedPost);
+              console.log(likedPost);
+            }
+          } else {
+            const removedLikePost = await removeLike(post.id, currentUser.uid);
+            const removedLikePostLocation = currentPost.findIndex(
+              (obj: IPost) => obj.id === post.id
+            );
+            if (removedLikePost) {
+              const updatedPosts = currentPost;
+              updatedPosts[removedLikePostLocation] = removedLikePost;
+              setCurrentPost(updatedPosts);
+              setPostState(removedLikePost);
+            }
           }
         }
       } catch (e) {
